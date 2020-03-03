@@ -1,6 +1,6 @@
 {
   "name": "@saasfe/egg-we-app-engine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "eggPlugin": {
     "name": "weAppEngine",

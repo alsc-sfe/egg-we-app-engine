@@ -2,6 +2,7 @@
 
 const grayConfig = require('./lib/gray-config');
 const LocalStorage = require('local-storage-es6');
+const fs = require('fs');
 
 
 /**
@@ -31,15 +32,20 @@ module.exports = function(agent) {
   const weAppEngineConfig = agent.config.weAppEngine;
   const { cacheDir, delimiter, group, projectEnv } = weAppEngineConfig;
 
+  // 若不存在文件目录，则创建目录
+  if (!fs.existsSync(cacheDir) || !fs.statSync(cacheDir).isDirectory()) {
+    fs.mkdirSync(cacheDir);
+  }
+
   const localStorage = new LocalStorage({
     path: cacheDir,
     encryptFileName: false,
     encryptFileContent: false,
-    mkdir: true,
+    mkdir: false,
     secretKey: '',
   });
 
-  const buildGrayRuleDataId = (appName) => {
+  const buildGrayRuleDataId = appName => {
     // acm的dataId不支持/，这里将/改为__
     return `app-gray${delimiter}${name}${delimiter}${appName.replace('/', '__')}`;
   };

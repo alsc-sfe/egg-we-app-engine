@@ -15,7 +15,7 @@ module.exports = app => {
     path: cacheDir,
     encryptFileName: false,
     encryptFileContent: false,
-    mkdir: true,
+    mkdir: false,
     secretKey: '',
   });
 
